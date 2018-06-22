@@ -1,0 +1,60 @@
+buildscript {
+    repositories {
+        mavenCentral()
+
+        maven {
+            url "https://repo.boundlessgeo.com/main/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.10.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'email-digester'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations.all {
+    exclude group: 'commons-logging'
+    exclude group: 'log4j'
+    exclude module: 'slf4j-log4j12'
+}
+
+dependencies {
+
+    compile 'org.elasticsearch.client:transport:6.2.3'
+    compile 'org.elasticsearch:elasticsearch:6.2.3'
+
+    compile 'edu.uci.ics:crawler4j:4.4.0'
+    compile 'org.jsoup:jsoup:1.11.2'
+
+    compile 'org.apache.spark:spark-core_2.11:2.3.0'
+    compile 'org.apache.spark:spark-mllib_2.11:2.3.0'
+    compile 'com.sendgrid:sendgrid-java:2.2.2'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'mysql:mysql-connector-java'
+
+    compile "org.springframework.boot:spring-boot-starter-data-neo4j"
+    compile"org.apache.commons:commons-collections4"
+
+    compile 'com.google.api-client:google-api-client:1.23.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+    compile 'com.google.apis:google-api-services-sheets:v4-rev513-1.23.0'
+    compile 'com.google.apis:google-api-services-drive:v2-rev303-1.23.0'
+
+}
